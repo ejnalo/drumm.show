@@ -1,0 +1,47 @@
+/* Inter */
+
+@font-face {
+	font-family: "Inter";
+	src: url("/assets/fonts/Inter-VariableFont_opsz,wght.ttf")
+		format("truetype");
+	font-style: normal;
+}
+
+@font-face {
+	font-family: "Inter";
+	src: url("/assets/fonts/Inter-Italic-VariableFont_opsz,wght.ttf")
+		format("truetype");
+	font-style: italic;
+}
+
+/* Roboto Serif */
+
+@font-face {
+	font-family: "Roboto Serif";
+	src: url("/assets/fonts/RobotoSerif-VariableFont_GRAD,opsz,wdth,wght.ttf")
+		format("truetype");
+	font-style: normal;
+}
+
+@font-face {
+	font-family: "Roboto Serif";
+	src: url("/assets/fonts/RobotoSerif-Italic-VariableFont_GRAD,opsz,wdth,wght.ttf")
+		format("truetype");
+	font-style: italic;
+}
+
+/* Diplomata SC */
+
+@font-face {
+	font-family: "Diplomata SC";
+	src: url("/assets/fonts/DiplomataSC-Regular.ttf") format("truetype");
+	font-style: normal;
+}
+
+/* Declarations */
+
+:root {
+	--font-sans: "Inter", Arial, sans-serif;
+	--font-title: "Roboto Serif", "Times New Roman", serif;
+	--font-display: "Diplomata SC", cursive, serif;
+}

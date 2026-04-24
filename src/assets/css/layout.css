@@ -1,0 +1,147 @@
+@import url("colors.css");
+
+header,
+main,
+footer {
+	width: 100%;
+	padding: 64px;
+}
+
+section {
+	padding-inline: 64px;
+}
+
+@media only screen and (min-width: 640px) {
+	header,
+	section,
+	footer {
+		padding-inline: 256px;
+	}
+
+	main {
+		padding-inline: 0;
+	}
+}
+
+/***** NAVBAR *****/
+
+nav.navbar {
+	position: sticky;
+	top: 0;
+	left: 0;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 24px;
+	background-color: var(--color-surface);
+	color: var(--color-surface-text);
+	height: 80px;
+	padding-inline: 48px;
+}
+
+nav.navbar#navbar-home {
+	position: fixed;
+}
+
+nav.navbar > .navlink {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 16px;
+}
+
+nav.navbar > .navlink {
+	color: var(--color-surface-text);
+	font-size: 1.1rem;
+	line-height: 100%;
+	font-weight: 500;
+	text-decoration: underline;
+	text-decoration-thickness: 3px;
+	text-decoration-color: transparent;
+	text-underline-offset: 4px;
+
+	height: 100%;
+
+	transition-duration: 150ms;
+}
+
+nav.navbar > .navlink:hover {
+	text-decoration-color: var(--color-primary);
+}
+
+nav.navbar > .navlink.active {
+	text-decoration-color: var(--color-surface-text-faded);
+}
+
+nav.navbar > .navlink > img#logo {
+	height: 48px;
+	width: auto;
+}
+nav.navbar > .navlink > img:not(#logo) {
+	height: 24px;
+	width: auto;
+}
+
+nav.navbar#navbar-home {
+	background-color: #00000080;
+}
+
+/***** HEADER *****/
+
+header#header-home {
+	display: flex;
+	justify-content: start;
+	align-items: center;
+
+	background-image: url("/public/header_bg.jpg");
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+
+	height: 100vh;
+}
+
+header#header-home > div#title-container {
+	flex: 0 0;
+	flex-basis: 50%;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: start;
+	gap: 64px;
+}
+
+#title-container .button {
+	font-size: 1.25rem;
+	padding: 20px 28px;
+}
+
+header#header-home #artist-container {
+	flex: 1 1;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	padding: 64px;
+}
+
+header:not(#header-home) {
+	text-align: center;
+}
+
+/***** CONTENU *****/
+
+main > * + * {
+	margin-top: 48px;
+}
+
+section > * + * {
+	margin-top: 32px;
+}
+
+main#content-home {
+	text-align: center;
+}
