@@ -1,6 +1,17 @@
 <?php
+	function gen_link() {
+		global $DB_HOST, $DB_USER, $DB_PASSWORD, $DB_NAME;
+
+		$DB_HOST = 'db';
+		$DB_USER = 'root';
+		$DB_PASSWORD = 'root';
+		$DB_NAME = 'test';
+
+		return mysqli_connect($DB_HOST, $DB_USER, $DB_PASSWORD, $DB_NAME);
+	}
+
 	function get_count($field, $filter = null) {
-		$link = mysqli_connect("db", "root", "root", "test");
+		$link = gen_link();
 
 		$query = "SELECT COUNT(*) as count FROM $field";
 
@@ -17,7 +28,7 @@
 	}
 
 	function get_featured_artist() {
-		$link = mysqli_connect("db", "root", "root", "test");
+		$link = gen_link();
 
 		$query = "SELECT * FROM artists LIMIT 1";
 		$result = mysqli_query($link, $query);
@@ -31,7 +42,7 @@
 			return;
 		}
 
-		$link = mysqli_connect("db", "root", "root", "test");
+		$link = gen_link();
 
 		$query = "SELECT * FROM concerts WHERE artist = " . $artist['id'] . " LIMIT 1";
 
@@ -57,8 +68,8 @@
 			<a class="navlink active" href="/">
 				<span>Accueil</span>
 			</a>
-			<a class="navlink" href="/festival.php">
-				<span>Festival</span>
+			<a class="navlink" href="/programme.php">
+				<span>Programme</span>
 			</a>
 			<a class="navlink" href="/inscription.php">
 				<span>Inscription</span>
@@ -126,15 +137,15 @@
 					<li>
 						<img src="/public/sponsors/mmiplace.svg" class="sponsor" />
 					</li>
-					<li>
+					<!--li>
 						<img src="/public/sponsors/sum.png" class="sponsor" />
-					</li>
+					</li-->
 					<li>
 						<img src="/public/sponsors/RégionIDF.png" class="sponsor" />
 					</li>
-					<li>
+					<!--li>
 						<img src="/public/sponsors/cloudflare.png" class="sponsor" />
-					</li>
+					</li-->
 					<li>
 						<img src="/public/sponsors/Steam.png" class="sponsor" />
 					</li>

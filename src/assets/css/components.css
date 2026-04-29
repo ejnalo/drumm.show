@@ -1,5 +1,28 @@
 @import url("colors.css");
 
+ul > li {
+	list-style-type: none;
+}
+
+li.concert {
+	display: flex;
+	align-items: center;
+
+	background-color: var(--color-surface);
+	color: var(--color-surface-text);
+}
+
+li.concert > img {
+	height: 288px;
+	width: 384px;
+	object-fit: cover;
+	object-position: center;
+}
+
+li.concert > div {
+	padding: 40px;
+}
+
 /***** GRILLE *****/
 
 ul.grid {
@@ -100,15 +123,19 @@ button,
 	font-size: 1rem;
 	font-weight: 600;
 	line-height: 100%;
-	padding: 16px 24px;
+
 	border: none;
 	cursor: pointer;
+
+	padding: 16px 24px;
 
 	transition-duration: 150ms;
 }
 
 button:hover,
-.button:hover {
+button:focus,
+.button:hover,
+.button:focus {
 	background-color: var(--color-primary-dark);
 }
 
@@ -122,7 +149,8 @@ button:hover,
 	padding-inline: 0 !important;
 }
 
-.btn-secondary:hover {
+.btn-secondary:hover,
+.btn-secondary:focus {
 	background-color: transparent;
 	text-decoration-color: var(--color-secondary);
 }

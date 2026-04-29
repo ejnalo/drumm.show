@@ -2,7 +2,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>DRUMM'Show: Inscription Artiste</title>
+		<title>DRUMM'Show - Inscription Artiste</title>
 
 		<link rel="stylesheet" href="/assets/css/main.css" type="text/css" />
 	</head>
@@ -11,8 +11,8 @@
 			<a class="navlink" href="/">
 				<span>Accueil</span>
 			</a>
-			<a class="navlink" href="/festival.php">
-				<span>Festival</span>
+			<a class="navlink" href="/programme.php">
+				<span>Programme</span>
 			</a>
 			<a class="navlink active" href="/inscription.php">
 				<span>Inscription</span>

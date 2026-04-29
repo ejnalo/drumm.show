@@ -29,13 +29,16 @@ nav.navbar {
 	position: sticky;
 	top: 0;
 	left: 0;
-	width: 100%;
+
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	gap: 24px;
+
 	background-color: var(--color-surface);
 	color: var(--color-surface-text);
+
+	width: 100%;
 	height: 80px;
 	padding-inline: 48px;
 }
@@ -66,18 +69,20 @@ nav.navbar > .navlink {
 	transition-duration: 150ms;
 }
 
-nav.navbar > .navlink:hover {
-	text-decoration-color: var(--color-primary);
+nav.navbar > .navlink:hover,
+nav.navbar > .navlink:focus {
+	text-decoration-color: var(--color-secondary);
 }
 
 nav.navbar > .navlink.active {
-	text-decoration-color: var(--color-surface-text-faded);
+	text-decoration-color: var(--color-primary);
 }
 
 nav.navbar > .navlink > img#logo {
 	height: 48px;
 	width: auto;
 }
+
 nav.navbar > .navlink > img:not(#logo) {
 	height: 24px;
 	width: auto;

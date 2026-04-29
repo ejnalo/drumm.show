@@ -1,4 +1,15 @@
 <?php
+	function gen_link() {
+		global $DB_HOST, $DB_USER, $DB_PASSWORD, $DB_NAME;
+
+		$DB_HOST = 'db';
+		$DB_USER = 'root';
+		$DB_PASSWORD = 'root';
+		$DB_NAME = 'test';
+
+		return mysqli_connect($DB_HOST, $DB_USER, $DB_PASSWORD, $DB_NAME);
+	}
+
 	function enregistrer_utilisateur(
 		$prenom,
 		$nom,
@@ -9,12 +20,7 @@
 		$tel,
 		$address
 	) {
-		$link = mysqli_connect(
-			'db',
-			'root',
-			'root',
-			'test'
-		);
+		$link = gen_link();
 
 		$query = mysqli_query(
 			$link,
@@ -61,8 +67,8 @@
 			<a class="navlink" href="/">
 				<span>Accueil</span>
 			</a>
-			<a class="navlink" href="/festival.php">
-				<span>Festival</span>
+			<a class="navlink" href="/programme.php">
+				<span>Programme</span>
 			</a>
 			<a class="navlink active" href="/inscription.php">
 				<span>Inscription</span>
