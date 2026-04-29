@@ -1,145 +1,74 @@
--- --------------------------------------------------------
--- Table : artists
--- --------------------------------------------------------
-
-CREATE TABLE `artists` (
-  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `name` VARCHAR(128) NOT NULL COMMENT 'Nom de l''artiste',
-  `last_name` VARCHAR(128) NOT NULL COMMENT 'Nom de famille de l''artiste',
-  `nickname` VARCHAR(128) DEFAULT NULL COMMENT 'Nom de scène',
-  `bio` VARCHAR(255) DEFAULT NULL COMMENT 'Description de l''artiste',
-  `avatar_url` VARCHAR(128) DEFAULT 'https://api.beam.ejnalo.me/users/beam/avatar.png'
-    COMMENT 'Lien de la photo de l''artiste',
-  `style` VARCHAR(255) DEFAULT NULL COMMENT 'Styles de l''artiste',
-  PRIMARY KEY (`id`)
+CREATE TABLE scenes (
+  id varchar(32) NOT NULL,
+  name varchar(255) NOT NULL, -- Nom complet de la salle
+  capacity int NOT NULL, -- Capacité de la salle
+  outdoor tinyint(1) NOT NULL DEFAULT 0, -- Salle en extérieur
+  price_solo int NOT NULL DEFAULT 0, -- Prix horaire pour un soliste
+  price_group int DEFAULT NULL, -- Prix horaire pour un groupe
+  PRIMARY KEY (id)
 );
 
-
--- --------------------------------------------------------
--- Table : scenes
--- --------------------------------------------------------
-
-CREATE TABLE `scenes` (
-  `id` VARCHAR(32) NOT NULL,
-  `name` VARCHAR(255)
-    CHARACTER SET utf8mb4
-    COLLATE utf8mb4_0900_ai_ci
-    NOT NULL COMMENT 'Nom complet de la salle',
-  `capacity` INT NOT NULL COMMENT 'Capacité de la salle',
-  `outdoor` BOOLEAN NOT NULL DEFAULT FALSE
-    COMMENT 'Salle en extérieur',
-  `price_solo` INT NOT NULL DEFAULT '0'
-    COMMENT 'Prix horaire pour un soliste',
-  `price_group` INT DEFAULT NULL
-    COMMENT 'Prix horaire pour un groupe',
-  PRIMARY KEY (`id`)
+CREATE TABLE artists (
+  id int unsigned NOT NULL AUTO_INCREMENT,
+  created_at timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  first_name varchar(128) NOT NULL, -- Nom de l'artiste
+  last_name varchar(128) NOT NULL, -- Prénom de l'artiste
+  email varchar(128) DEFAULT NULL, -- Email de l'artiste
+  nickname varchar(128) DEFAULT NULL, -- Nom de scène
+  avatar_url varchar(128) NOT NULL DEFAULT 'https://api.beam.ejnalo.me/users/beam/avatar.png', -- Photo
+  bio varchar(255) DEFAULT NULL, -- Description
+  style varchar(255) DEFAULT NULL, -- Styles
+  spotify varchar(64) DEFAULT NULL,
+  youtube varchar(64) DEFAULT NULL,
+  deezer varchar(64) DEFAULT NULL,
+  soundcloud varchar(64) DEFAULT NULL,
+  bandlab varchar(64) DEFAULT NULL,
+  beam varchar(64) DEFAULT NULL,
+  instagram varchar(64) DEFAULT NULL,
+  PRIMARY KEY (id)
 );
 
-
--- --------------------------------------------------------
--- Table : concerts
--- --------------------------------------------------------
-
-CREATE TABLE `concerts` (
-  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
-    COMMENT 'Date de réservation du concert',
-  `planned_at` TIMESTAMP NOT NULL COMMENT 'Date de concert',
-  `ends_at` TIMESTAMP NOT NULL COMMENT 'Date de fin du concert',
-  `scene` VARCHAR(32)
-    CHARACTER SET utf8mb4
-    COLLATE utf8mb4_0900_ai_ci
-    NOT NULL COMMENT 'Scène où aura lieu le concert',
-  `artist` INT UNSIGNED NOT NULL COMMENT 'Artiste qui performe',
-
-  PRIMARY KEY (`id`),
-
-  KEY `concerts_artists_relation` (`artist`),
-  KEY `concerts_scene_relation` (`scene`),
-
-  CONSTRAINT `concerts_artists_relation`
-    FOREIGN KEY (`artist`)
-    REFERENCES `artists` (`id`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE,
-
-  CONSTRAINT `concerts_scene_relation`
-    FOREIGN KEY (`scene`)
-    REFERENCES `scenes` (`id`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE
-
+CREATE TABLE concerts (
+  id int unsigned NOT NULL AUTO_INCREMENT,
+  created_at timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP, -- Date de réservation
+  planned_at timestamp NOT NULL, -- Date de concert
+  ends_at timestamp NOT NULL, -- Fin du concert
+  name varchar(64) DEFAULT NULL, -- Titre
+  description varchar(255) DEFAULT NULL, -- Description
+  scene varchar(32) NOT NULL, -- Scène
+  artist int unsigned NOT NULL, -- Artiste
+  PRIMARY KEY (id),
+  KEY concerts_artists_relation (artist),
+  KEY concerts_scene_relation (scene),
+  CONSTRAINT concerts_artists_relation FOREIGN KEY (artist) REFERENCES artists(id) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT concerts_scene_relation FOREIGN KEY (scene) REFERENCES scenes(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-
--- --------------------------------------------------------
--- Table : visitors
--- --------------------------------------------------------
-
-CREATE TABLE `visitors` (
-  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
-    COMMENT 'Date d''enregistrement du client',
-
-  `first_name` VARCHAR(128) NOT NULL
-    COMMENT 'Prénom du client',
-
-  `last_name` VARCHAR(128) NOT NULL
-    COMMENT 'Nom de famille du client',
-
-  `age` INT NOT NULL,
-
-  `status` VARCHAR(32) DEFAULT 'normal'
-    COMMENT 'Statut du client (normal, étudiant...)',
-
-  `student_number` VARCHAR(16) DEFAULT NULL
-    COMMENT 'N° étudiant',
-
-  `mail` VARCHAR(255) UNIQUE NOT NULL
-    COMMENT 'Adresse mail du client',
-
-  `tel` VARCHAR(32) UNIQUE DEFAULT NULL
-    COMMENT 'N° de tel du client',
-
-  `address` VARCHAR(255) DEFAULT NULL
-    COMMENT 'Adresse du client',
-
-  PRIMARY KEY (`id`)
+CREATE TABLE visitors (
+  id int unsigned NOT NULL AUTO_INCREMENT,
+  created_at timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP, -- Date d'enregistrement
+  first_name varchar(128) NOT NULL, -- Prénom
+  last_name varchar(128) NOT NULL, -- Nom
+  age int NOT NULL,
+  status varchar(32) NOT NULL DEFAULT 'normal', -- Statut
+  student_number varchar(16) DEFAULT NULL, -- N° étudiant
+  mail varchar(255) NOT NULL, -- Email
+  tel varchar(32) DEFAULT NULL, -- Téléphone
+  address varchar(255) DEFAULT NULL, -- Adresse
+  PRIMARY KEY (id),
+  UNIQUE KEY mail_unique (mail),
+  UNIQUE KEY tel_unique (tel)
 );
 
-
--- --------------------------------------------------------
--- Table : reservations
--- --------------------------------------------------------
-
-CREATE TABLE `reservations` (
-  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
-    COMMENT 'Date de réservation',
-
-  `day` DATE NOT NULL
-    COMMENT 'Jour de réservation',
-
-  `morning` TINYINT(1) NOT NULL DEFAULT 0
-    COMMENT 'Actif le matin',
-
-  `afternoon` TINYINT(1) NOT NULL DEFAULT 0
-    COMMENT 'Actif l''après-midi',
-
-  `vip` TINYINT(1) NOT NULL DEFAULT 0
-    COMMENT 'True',
-
-  `owner` INT UNSIGNED NOT NULL
-    COMMENT 'Proprio',
-
-  PRIMARY KEY (`id`),
-
-  KEY `reservations_owners` (`owner`),
-
-  CONSTRAINT `reservations_owners`
-    FOREIGN KEY (`owner`)
-    REFERENCES `visitors` (`id`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE
+CREATE TABLE reservations (
+  id int unsigned NOT NULL AUTO_INCREMENT,
+  created_at timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP, -- Date de réservation
+  day date NOT NULL DEFAULT '1970-01-01', -- Jour
+  afternoon tinyint(1) NOT NULL DEFAULT 0, -- Après-midi
+  evening tinyint(1) NOT NULL DEFAULT 0, -- Soir
+  vip tinyint(1) NOT NULL DEFAULT 0, -- VIP
+  owner int unsigned NOT NULL, -- Proprio
+  PRIMARY KEY (id),
+  KEY reservations_owners (owner),
+  CONSTRAINT reservations_owners FOREIGN KEY (owner) REFERENCES visitors(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
