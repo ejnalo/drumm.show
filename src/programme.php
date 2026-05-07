@@ -65,11 +65,10 @@
 				continue;
 			}
 
-			$concerts[] = [
-				...$concert,
+			$concerts[] = array_merge($concert, [
 				'artist' => $artist,
 				'scene' => $scene,
-			];
+			]);
 		}
 
 		return $concerts;
