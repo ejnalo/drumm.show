@@ -71,19 +71,19 @@
 			<a class="navlink" href="/programme.php">
 				<span>Programme</span>
 			</a>
-			<a class="navlink" href="/inscription.php">
-				<span>Inscription</span>
+			<a class="navlink" href="/reservation.php">
+				<span>Réserver un concert</span>
 			</a>
-			<a class="navlink" href="/inscription.php">
-				<span>Réservation</span>
+			<a class="navlink" href="/register/artist.php">
+				<span>Inscription artiste</span>
 			</a>
 		</nav>
 		<header id="header-home">
 			<div id="title-container">
 				<h1>DRUMM'Show: Le festival de musique pour les jeunes</h1>
 				<div class="btn-row">
-					<a class="button" href="/reservation.php">Réserver mes entrées</a>
-					<a class="button btn-secondary" href="/register_artist.php">S'inscrire en tant qu'artiste</a>
+					<a class="button" href="/programme.php">Voir le programme</a>
+					<a class="button btn-secondary" href="/register/concert.php">Réserver un horaire de concert</a>
 				</div>
 			</div>
 			<div id="artist-container">
@@ -100,7 +100,7 @@
 							?>
 						</p>
 						<?php
-							echo "<a href='/artist?artistId=".$artist['id']."'>Voir sa page</a>";
+							echo "<a href='/artist.php?id=".$artist['id']."'>Voir sa page</a>";
 						?>
 					</div>
 				</div>
@@ -119,7 +119,7 @@
 					</li>
 					<li>
 						<span class="bigint"><?php
-							echo get_count("reservations", "YEAR(created_at) >= 2026");
+							echo get_count("reservations");
 						?></span>
 						<p>Pass demi-journée réservées</p>
 					</li>
@@ -137,15 +137,15 @@
 					<li>
 						<img src="/public/sponsors/mmiplace.svg" class="sponsor" />
 					</li>
-					<!--li>
+					<li>
 						<img src="/public/sponsors/sum.png" class="sponsor" />
-					</li-->
+					</li>
 					<li>
 						<img src="/public/sponsors/RégionIDF.png" class="sponsor" />
 					</li>
-					<!--li>
+					<li>
 						<img src="/public/sponsors/cloudflare.png" class="sponsor" />
-					</li-->
+					</li>
 					<li>
 						<img src="/public/sponsors/Steam.png" class="sponsor" />
 					</li>

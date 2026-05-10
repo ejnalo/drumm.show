@@ -103,6 +103,7 @@ ul.carrousel > li > span.bigint {
 
 .btn-row {
 	display: flex;
+	align-items: center;
 	gap: 32px;
 }
 
@@ -204,6 +205,34 @@ form textarea {
 form input[type="submit"] {
 	background-color: white;
 	color: black;
+}
+
+.price-preview {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+
+	background-color: var(--color-surface);
+	color: var(--color-surface-text);
+	border-radius: 16px;
+	padding: 24px;
+}
+
+.price-preview-label {
+	font-size: 0.9rem;
+	text-transform: uppercase;
+	letter-spacing: 0.08em;
+	opacity: 0.75;
+}
+
+.price-preview-value {
+	font-size: 1.6rem;
+	font-weight: 700;
+	line-height: 1.2;
+}
+
+.price-preview-details {
+	opacity: 0.8;
 }
 
 /***** CARTES *****/

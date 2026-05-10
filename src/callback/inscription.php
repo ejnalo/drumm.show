@@ -72,11 +72,11 @@
 			<a class="navlink" href="/programme.php">
 				<span>Programme</span>
 			</a>
-			<a class="navlink active" href="/inscription.php">
-				<span>Inscription</span>
+			<a class="navlink" href="/reservation.php">
+				<span>Réserver un concert</span>
 			</a>
-			<a class="navlink" href="/inscription.php">
-				<span>Réservation</span>
+			<a class="navlink active" href="/register/artist.php">
+				<span>Inscription artiste</span>
 			</a>
 		</nav>
 		<?php

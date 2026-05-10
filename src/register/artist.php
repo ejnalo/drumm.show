@@ -1,3 +1,61 @@
+<?php
+	function gen_link() {
+		global $DB_HOST, $DB_USER, $DB_PASSWORD, $DB_NAME;
+
+		$DB_HOST = 'db';
+		$DB_USER = 'root';
+		$DB_PASSWORD = 'root';
+		$DB_NAME = 'test';
+
+		return mysqli_connect($DB_HOST, $DB_USER, $DB_PASSWORD, $DB_NAME);
+	}
+
+	function enregistrer_artiste(
+		$nom,
+		$prenom,
+		$mail,
+		$nom_scene,
+		$bio,
+		$avatar_url,
+		$style,
+		$spotify,
+		$youtube,
+		$deezer,
+		$soundcloud,
+		$bandlab,
+		$beam,
+		$instagram
+	) {
+		$link = gen_link();
+
+		$query = mysqli_query(
+			$link,
+			"INSERT INTO artists (last_name, first_name, email, nickname, bio, avatar_url, style, spotify, youtube, deezer, soundcloud, bandlab, beam, instagram)
+			VALUES (\"$nom\", \"$prenom\", '$mail', \"$nom_scene\", \"$bio\", '$avatar_url', \"$style\", '$spotify', '$youtube', '$deezer', '$soundcloud', '$bandlab', '$beam', '$instagram')"
+		);
+
+		if ($query) {
+			echo "<main>
+				<section>
+					<h1>Votre compte a été enregistré !</h1>
+					<a href='/'>Cliquez pour retourner à l'accueil</a>
+				</section>
+			</main>";
+
+			header("Location: /");
+			exit;
+		} else {
+			echo "<main>
+				<section>
+					<h1>Impossible d'enregistrer votre compte.</h1>
+					<a href='/'>Cliquez pour retourner à l'accueil</a>
+				</section>
+			</main>";
+
+			die(mysqli_error($link));
+		}
+	}
+?>
 <html lang="en">
 	<head>
 		<meta charset="UTF-8">
@@ -14,11 +72,11 @@
 			<a class="navlink" href="/programme.php">
 				<span>Programme</span>
 			</a>
-			<a class="navlink active" href="/inscription.php">
-				<span>Inscription</span>
+			<a class="navlink" href="/reservation.php">
+				<span>Réserver un concert</span>
 			</a>
-			<a class="navlink" href="/inscription.php">
-				<span>Réservation</span>
+			<a class="navlink active" href="/register/artist.php">
+				<span>Inscription artiste</span>
 			</a>
 		</nav>
 		<header>
@@ -31,18 +89,14 @@
 					<p>Nous gardons ces informations pour te communiquer en cas d'imprévu, de report, d'annulation ou pour te dénoncer à l'URSSAF.</p>
 					<div class="form-row">
 						<label for="prenom">
-							<span>Ton prénom*</span>
+							<span>Prénom*</span>
 							<input type="text" name="prenom" placeholder="John" required />
 						</label>
 						<label for="nom">
-							<span>Ton nom*</span>
+							<span>Nom*</span>
 							<input type="text" name="nom" placeholder="DOE" required />
 						</label>
 					</div>
-					<label for="mail">
-						<span>Adresse mail (optionnel)</span>
-						<input type="email" name="mail" placeholder="exemple@drum.ms" />
-					</label>
 					<h2>Profil d'artiste</h2>
 					<div class="form-row">
 						<label for="nickname">

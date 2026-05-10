@@ -83,8 +83,8 @@
 		'mercredi_soir' => get_concerts('2026-04-29 20:00:00', '2026-04-30 01:00:00'),
 		'jeudi_aprem' => get_concerts('2026-04-30 15:00:00', '2026-04-30 20:00:00'),
 		'jeudi_soir' => get_concerts('2026-04-30 20:00:00', '2026-05-01 01:00:00'),
-		'vendredi_aprem' => get_concerts('2026-04-01 15:00:00', '2026-04-01 20:00:00'),
-		'vendredi_soir' => get_concerts('2026-04-01 20:00:00', '2026-04-02 01:00:00'),
+		'vendredi_aprem' => get_concerts('2026-05-01 15:00:00', '2026-05-01 20:00:00'),
+		'vendredi_soir' => get_concerts('2026-05-01 20:00:00', '2026-05-02 01:00:00'),
 	];
 
 	function render_concerts($programme, $periode) {
@@ -93,18 +93,16 @@
 		}
 
 		foreach ($programme[$periode] as $concert) {
+			$artist_name = isset($concert['artist']['nickname'])
+				? $concert['artist']['nickname']
+				: $concert['artist']['first_name'] . ' ' . $concert['artist']['last_name'];
+
 			echo '<li class="concert">';
 			echo '<img src="' . $concert['artist']['avatar_url'] . '" />';
 			echo '<div>';
+
 			echo '<h3>';
-
-			if (isset($concert['artist']['nickname'])) {
-				echo $concert['artist']['nickname'];
-			} else {
-				echo $concert['artist']['first_name'] . ' ' . $concert['artist']['last_name'];
-			}
-
-			echo ' - ' . ($concert['name'] ?? 'Concert');
+			echo $artist_name . ' - ' . ($concert['name'] ?? 'Concert');
 			echo '</h3>';
 
 			echo '<p class="subtext">';
@@ -121,8 +119,11 @@
 				. date('H:i', strtotime($concert['ends_at']))
 				. '</p><br/>';
 
+			echo '<div class="btn-row">';
+			echo '<a class="button" href="/reservation.php?concert=' . $concert['id'] . '">Reserver ce concert</a>';
 			echo '<a href="/artist.php?id=' . $concert['artist']['id'] . '">';
 			echo "Voir l'artiste</a>";
+			echo '</div>';
 
 			echo '</div>';
 			echo '</li>';
@@ -145,11 +146,11 @@
 			<a class="navlink active" href="/programme.php">
 				<span>Programme</span>
 			</a>
-			<a class="navlink" href="/inscription.php">
-				<span>Inscription</span>
+			<a class="navlink" href="/reservation.php">
+				<span>Réserver un concert</span>
 			</a>
-			<a class="navlink" href="/inscription.php">
-				<span>Réservation</span>
+			<a class="navlink" href="/register/artist.php">
+				<span>Inscription artiste</span>
 			</a>
 		</nav>
 		<header>
