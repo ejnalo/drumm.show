@@ -53,6 +53,22 @@
 		exit;
 	}
 
+	$check = mysqli_query(
+		$link,
+		"SELECT concerts.id
+		FROM concerts
+		INNER JOIN scenes ON scenes.id = concerts.scene
+		WHERE scenes.id = '$scene'
+			AND concerts.planned_at < '$ends_at'
+			AND concerts.ends_at > '$planned_at'
+		LIMIT 1"
+	);
+
+	if ($check && mysqli_num_rows($check) > 0) {
+		show_message("Impossible de réserver l'horaire", "Cette scène est déjà occupée sur ce créneau.");
+		exit;
+	}
+
 	$query = mysqli_query(
 		$link,
 		"INSERT INTO concerts (planned_at, ends_at, name, description, scene, artist)
