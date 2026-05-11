@@ -1,0 +1,107 @@
+@import url("colors.css");
+
+.admin-nav {
+	justify-content: flex-start;
+	gap: 16px;
+}
+
+.admin-nav .navlink {
+	font-size: 1rem;
+}
+
+.admin-message {
+	background-color: var(--color-surface);
+	color: var(--color-surface-text);
+	border-radius: 12px;
+	padding: 16px 20px;
+}
+
+.admin-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+	gap: 16px;
+}
+
+.admin-card {
+	background-color: var(--color-surface);
+	color: var(--color-surface-text);
+	border-radius: 16px;
+	padding: 24px;
+}
+
+.admin-card .bigint {
+	color: var(--color-secondary);
+	font-size: 2.2rem;
+	font-weight: 700;
+	line-height: 1;
+}
+
+.admin-card .subtitle {
+	margin-top: 8px;
+	opacity: 0.8;
+}
+
+.admin-section {
+	display: flex;
+	flex-direction: column;
+	gap: 24px;
+}
+
+form.admin-form {
+	width: 100%;
+	margin: 0;
+}
+
+form.admin-inline {
+	width: auto;
+	margin: 0;
+	display: inline-flex;
+	gap: 8px;
+}
+
+form.admin-inline input[type="submit"] {
+	padding: 8px 12px;
+	font-size: 0.9rem;
+}
+
+.admin-table {
+	width: 100%;
+	border-collapse: collapse;
+	margin-top: 16px;
+}
+
+.admin-table th,
+.admin-table td {
+	text-align: left;
+	padding: 12px 16px;
+	border-bottom: 1px solid #ffffff14;
+	vertical-align: top;
+}
+
+.admin-table tr:hover {
+	background-color: #ffffff08;
+}
+
+.admin-actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 12px;
+	align-items: center;
+}
+
+.admin-actions a.button {
+	padding: 10px 16px;
+	font-size: 0.95rem;
+}
+
+.admin-small {
+	font-size: 0.9rem;
+	opacity: 0.8;
+}
+
+@media only screen and (max-width: 800px) {
+	.admin-table {
+		display: block;
+		overflow-x: auto;
+	}
+}
